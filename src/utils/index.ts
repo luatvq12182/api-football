@@ -1,4 +1,4 @@
-import { Competition, DayLabels } from 'src/constants';
+import { Competition, DayLabels, StageLabel } from 'src/constants';
 
 const genTableStandings = (
     competition: string,
@@ -394,7 +394,7 @@ const genTableTopScorers = (competition: string, scorers) => {
     return '';
 };
 
-const genMatches = (_competition: string, matches) => {
+const genMatches = (competition: any, matches) => {
     const matchesByDate = {};
 
     matches.forEach((match) => {
@@ -419,7 +419,13 @@ const genMatches = (_competition: string, matches) => {
                 const day = date.getDay();
 
                 const matchday = match[1][0]?.matchday;
+                const stage = match[1][0]?.stage;
                 const matches = match[1];
+                const textVongDau = genTextVongDau(
+                    competition,
+                    stage,
+                    matchday,
+                );
 
                 return `
                     <div class="width_common wvd content-block block-lichdau d-flex mb20">
@@ -428,7 +434,7 @@ const genMatches = (_competition: string, matches) => {
                     match[0]
                 }</div>
                             <div class="wvd text-vongdau">
-                                Vòng ${matchday}
+                                ${textVongDau}
                             </div>
 
                             ${matches
@@ -475,7 +481,7 @@ const genMatches = (_competition: string, matches) => {
     `;
 };
 
-const genMatchResults = (_competition: string, matches) => {
+const genMatchResults = (competition: string, matches) => {
     const matchesByDate = {};
 
     matches.forEach((match) => {
@@ -500,7 +506,13 @@ const genMatchResults = (_competition: string, matches) => {
                 const day = date.getDay();
 
                 const matchday = match[1][0]?.matchday;
+                const stage = match[1][0]?.stage;
                 const matches = match[1];
+                const textVongDau = genTextVongDau(
+                    competition,
+                    stage,
+                    matchday,
+                );
 
                 return `
                     <div class="width_common wvd content-block block-lichdau d-flex mb20">
@@ -509,7 +521,7 @@ const genMatchResults = (_competition: string, matches) => {
                     match[0]
                 }</div>
                             <div class="wvd text-vongdau">
-                                Vòng ${matchday}
+                                ${textVongDau}
                             </div>
 
                             ${matches
@@ -566,6 +578,30 @@ const genMatchResults = (_competition: string, matches) => {
             })
             .join('')}
     `;
+};
+
+const genTextVongDau = (competition: any, stage: any, matchday: any) => {
+    if (StageLabel[stage]) {
+        if (['FINAL', 'THIRD_PLACE'].includes(stage)) {
+            return StageLabel[stage];
+        }
+
+        if (stage === 'GROUP_STAGE') {
+            if (competition === Competition.ChampionsLeague) {
+                return `${StageLabel[stage]} · Ngày thi đấu ${matchday}/6`;
+            }
+
+            if (competition === Competition.Euro) {
+                return `${StageLabel[stage]} · Ngày thi đấu ${matchday}/3`;
+            }
+
+            return StageLabel[stage];
+        }
+
+        return `${StageLabel[stage]} · Lượt ${matchday}/2`;
+    } else {
+        return `Vòng ${matchday}`;
+    }
 };
 
 export { genTableStandings, genTableTopScorers, genMatches, genMatchResults };

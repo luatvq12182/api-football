@@ -6,6 +6,17 @@ export enum Competition {
     Ligue1 = 'FL1',
     Eredivisie = 'DED',
     PrimeiraLiga = 'PPL',
+    ChampionsLeague = 'CL',
+    Euro = 'EC',
+}
+
+export enum StageLabel {
+    FINAL = 'Chung kết',
+    THIRD_PLACE = 'Hạng ba',
+    SEMI_FINALS = 'Bán kết',
+    QUARTER_FINALS = 'Tứ kết',
+    LAST_16 = 'Vòng 16',
+    GROUP_STAGE = 'Vòng bảng',
 }
 
 export const DayLabels = {

@@ -116,7 +116,12 @@ export class FootballService {
 
             if (cvHtml) {
                 return {
-                    html: genMatches(code, matches.data.matches),
+                    html: genMatches(
+                        code,
+                        matches.data.matches.filter((e) => {
+                            return !!e.awayTeam.name;
+                        }),
+                    ),
                 };
             } else {
                 return matches.data;
