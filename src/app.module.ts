@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { CacheModule } from '@nestjs/cache-manager';
 import { FootballModule } from './modules/football.module';
 
 @Module({
@@ -8,6 +9,7 @@ import { FootballModule } from './modules/football.module';
             isGlobal: true,
         }),
         FootballModule,
+        CacheModule.register(),
     ],
     controllers: [],
     providers: [],
