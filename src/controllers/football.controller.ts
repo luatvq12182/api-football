@@ -87,4 +87,11 @@ export class FootballController {
     ) {
         return this.footballService.getMatchResults(code, +cvHtml);
     }
+
+    @Get('/cache/:key')
+    async test(@Param('key') key: string) {
+        console.log('Get cache of key: ', key);
+
+        return this.footballService.testCache(key);
+    }
 }

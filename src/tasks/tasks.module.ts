@@ -1,9 +1,8 @@
-import { HttpModule } from '@nestjs/axios';
-import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
+import { CacheModule } from '@nestjs/cache-manager';
+import { HttpModule } from '@nestjs/axios';
 import { ConfigModule } from '@nestjs/config';
-import { FootballController } from 'src/controllers/football.controller';
-import { FootballService } from 'src/services/football.service';
+import { TasksService } from './tasks.service';
 
 @Module({
     imports: [
@@ -16,7 +15,6 @@ import { FootballService } from 'src/services/football.service';
             },
         }),
     ],
-    providers: [FootballService],
-    controllers: [FootballController],
+    providers: [TasksService],
 })
-export class FootballModule {}
+export class TasksModule {}

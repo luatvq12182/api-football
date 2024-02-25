@@ -604,4 +604,18 @@ const genTextVongDau = (competition: any, stage: any, matchday: any) => {
     }
 };
 
-export { genTableStandings, genTableTopScorers, genMatches, genMatchResults };
+const sleep = (ms: number) => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve('wake up');
+        }, ms);
+    });
+};
+
+export {
+    genTableStandings,
+    genTableTopScorers,
+    genMatches,
+    genMatchResults,
+    sleep,
+};
